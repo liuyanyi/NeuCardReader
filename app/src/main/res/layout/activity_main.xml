@@ -38,6 +38,7 @@
                     android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans"
                     android:padding="5sp"
                     android:text="卡类型"
                     android:textSize="18sp"
@@ -47,6 +48,7 @@
                     android:id="@+id/nametitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans"
                     android:padding="5sp"
                     android:text="姓名"
                     android:textSize="18sp"
@@ -56,6 +58,7 @@
                     android:id="@+id/idtitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans"
                     android:padding="5sp"
                     android:text="学号"
                     android:textSize="18sp"
@@ -65,6 +68,7 @@
                     android:id="@+id/balancetitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans"
                     android:padding="5sp"
                     android:text="余额"
                     android:textSize="18sp"
@@ -74,6 +78,7 @@
                     android:id="@+id/hardwaretitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans"
                     android:padding="5sp"
                     android:text="硬件ID"
                     android:textSize="18sp"
@@ -87,6 +92,7 @@
                     android:id="@+id/depttitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans"
                     android:padding="5sp"
                     android:text="学院"
                     android:textSize="18sp"
@@ -111,41 +117,41 @@
                     android:id="@+id/isNewcapec"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans"
                     android:padding="5sp"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/Name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans"
                     android:padding="5sp"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/Id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans"
                     android:padding="5sp"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/Balance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans"
                     android:padding="5sp"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/Hardware"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans"
                     android:padding="5sp"
                     android:textSize="18sp"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -155,9 +161,9 @@
                     android:id="@+id/Dept"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans"
                     android:padding="5sp"
                     android:textSize="18sp"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
