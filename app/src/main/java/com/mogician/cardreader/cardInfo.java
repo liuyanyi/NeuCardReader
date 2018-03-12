@@ -12,15 +12,15 @@ public class cardInfo {
 
     private MainActivity mainActivity;
 
-    private String hardwareId;
+    private String hardwareId="";
 
-    private String studentId;
+    private String studentId="";
 
-    private String studentName;
+    private String studentName="";
 
-    private String cardBalance;
+    private String cardBalance="";
 
-    private String studentDept=null;
+    private String studentDept="";
 
     private boolean isNewcapecCard=false;
 
@@ -85,34 +85,27 @@ public class cardInfo {
     public void show(){
         if(isNewcapecCard){
             isCard.setText("校园卡");
-            isCard.setVisibility(View.VISIBLE);
 
             name.setText(studentName);
-            name.setVisibility(View.VISIBLE);
 
             id.setText(studentId);
-            id.setVisibility(View.VISIBLE);
 
             balance.setText(cardBalance);
-            balance.setVisibility(View.VISIBLE);
 
             hardware.setText(hardwareId);
-            hardware.setVisibility(View.VISIBLE);
 
             dept.setText(studentDept);
-            dept.setVisibility(View.VISIBLE);
         }
         else{
             isCard.setText("非校园卡");
-            isCard.setVisibility(View.VISIBLE);
 
             hardware.setText(hardwareId);
-            hardware.setVisibility(View.VISIBLE);
 
-            name.setVisibility(View.GONE);
-            id.setVisibility(View.GONE);
-            balance.setVisibility(View.GONE);
-            dept.setVisibility(View.GONE);
+            name.setText("");
+            id.setText("");
+            balance.setText("");
+            dept.setText("");
+
         }
 
     }
