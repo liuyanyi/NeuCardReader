@@ -7,8 +7,14 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.IsoDep;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +24,8 @@ import java.util.regex.Pattern;
 
 
 //TODO 代码优化，预计大部分都可以去掉
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private NfcAdapter nfcAdapter;
     private PendingIntent pi;
@@ -30,6 +37,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
 
@@ -38,6 +57,41 @@ public class MainActivity extends AppCompatActivity {
                     new Intent(this, getClass())
                             .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
             processIntent(this.getIntent());
+        }
+
+
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_nfc) {
+
+        } else if (id == R.id.nav_share) {
+            Intent textIntent = new Intent(Intent.ACTION_SEND);
+            textIntent.setType("text/plain");
+            textIntent.putExtra(Intent.EXTRA_TEXT, "Newcapec Card Reader : https://github.com/liuyanyi/NewcapecCardReader");
+            startActivity(Intent.createChooser(textIntent, "分享Newcapec Card Reader"));
+        } else if (id == R.id.nav_about) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
     }
 
@@ -65,23 +119,23 @@ public class MainActivity extends AppCompatActivity {
      */
     private void processIntent(Intent intent) {
         //取出封装在intent中的TAG
-        cardInfo card=readCard(intent);
-        if(card!=null){
+
+        cardInfo card = readCard(intent);
+        if (card != null) {
+            card.onFinish();
             card.show();
-            card.showInLog();
+            //card.showInLog();
         }
     }
 
     private cardInfo readCard(Intent intent) {
 
-        cardInfo card=new cardInfo(this);
-
+        cardInfo card = new cardInfo(this);
 
         Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         if (tagFromIntent == null)
             return null;
         card.setHardwareId(byteToHex(tagFromIntent.getId()));
-
 
 
         if (intent == null) {
@@ -100,7 +154,9 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
 
+
         try {
+
             isoDep.connect();
 //            a(this.NfcMainfare);
 //            extraID();
@@ -139,9 +195,19 @@ public class MainActivity extends AppCompatActivity {
                         card.setStudentId(action);
                     }
 
+                    transceive = isoDep.transceive(g.a(fInts.personId));
+                    //身份证
+                    if (transceive != null && g.c(transceive)) {
+                        a = g.a(transceive);
+                        g.a(a, 0, transceive, 0, transceive.length - 2);
+                        action = g.a(a, 0, a.length, "GB18030").trim();
+//                        Log.d("卡号", action);
+                        card.setPersonId(action);
+                    }
+
 
                     transceive = isoDep.transceive(g.a(fInts.g));
-                    //可能是学院,
+                    //学院
                     if (transceive != null && g.c(transceive)) {
                         a = g.a(transceive);
                         g.a(a, 0, transceive, 0, transceive.length - 2);
@@ -174,6 +240,94 @@ public class MainActivity extends AppCompatActivity {
                         a(isoDep);
                     }
 
+//测试部分，用于遍历卡内储存地址
+//
+//                    for(int j=0;j<fInts.tt.length;j++)
+////                        transceive = isoDep.transceive(g.a(fInts.tt[j]));
+//                        for(int ii=0x961600;ii<0x961700;ii=ii+0x1){
+//                            String sss;
+//                        if(ii<=0xF)
+//                            sss="00B0"+"00000"+Integer.toHexString(ii).toUpperCase();
+//                        else if(ii<0xFF)
+//                            sss="00B0"+"0000"+Integer.toHexString(ii).toUpperCase();
+//                        else if(ii<0xFFF)
+//                            sss="00B0"+"000"+Integer.toHexString(ii).toUpperCase();
+//                        else if(ii<0xFFFF)
+//                            sss="00B0"+"00"+Integer.toHexString(ii).toUpperCase();
+//                        else if(ii<0xFFFFF)
+//                            sss="00B0"+"0"+Integer.toHexString(ii).toUpperCase();
+//                        else
+//                            sss="00B0"+""+Integer.toHexString(ii).toUpperCase();
+//
+//
+//                            Log.d("===", "============="+j+","+sss+"=================");
+//
+//                            transceive = isoDep.transceive(g.a(fInts.tt[j]));
+//                    //测试
+//                    if (transceive != null && g.c(transceive)) {
+//                        transceive = isoDep.transceive(g.a(sss));
+//                        if (transceive != null && g.c(transceive)) {
+////                            Log.d("测试", byteToHex(transceive));
+//                            transceive = g.a(transceive);
+////                            System.out.println(transceive);
+////                            for(byte e : transceive) {
+////                                System.out.print(e + " ");
+////                            }
+//                            String str2=new String(transceive);
+////                            System.out.println("\n打印2："+str2);
+////                            Log.d("测试", byteToHex(transceive));
+////                            Log.d("测试", transceive.toString().trim());
+//                            Log.d("测试", new String(transceive,"GB18030").trim());
+////                            Log.d("测试", new String(transceive,"UTF-8").trim());
+////                            Log.d("测试", new String(transceive,"ISO-8859-1").trim());
+//
+//                            try {
+//                                intValue = Integer.valueOf(g.a(transceive, transceive.length), 16).intValue();
+//                                action = (intValue / 100) + "." + (intValue % 100);
+////                                    bVar.e(action);
+//                                Log.d("测试", action);
+//                            }catch (NumberFormatException e){
+//                                Log.d("测试", "boom");
+//                            }
+//
+////                            card.setCardBalance(action);
+//                        }else{
+////                            Log.d("测试", "无2");
+//                        }
+////                        a(isoDep);
+//                    }else{
+////                        Log.d("测试", "无1");
+//                    }
+////                                Log.d("===", "======================================");
+//
+//                    }
+//
+//for(int j=0;j<fInts.tt.length;j++) {
+//    transceive = isoDep.transceive(g.a(fInts.tt[j]));
+//    if (transceive != null && g.c(transceive)) {
+//        a = g.a(transceive);
+//        Log.d("测试0,"+j, String.valueOf(a));
+//        Log.d("测试0.5,"+j, g.a(transceive, transceive.length));
+//        g.a(a, 0, transceive, 0, transceive.length - 2);
+//        Log.d("测试1,"+j, String.valueOf(a));
+//        action = g.a(a, 0, a.length, "UTF-8").trim();
+////                        Log.d("***", action);
+//        Log.d("测试2,"+j, action);
+//        Log.d("eiiiiii", "======================================");
+//        if (StringUtils.d(action) || a(action) || action.contains("000000")) {
+////                                    bVar.d(action);
+////                            Log.d("学院******", action);
+//        } else {
+////                          bVar.c(action);
+////                            Log.d("学院***", action);
+////                            card.setStudentDept(action);
+//        }
+//    } else {
+//        Log.d("测试", "无,"+j);
+//        Log.d("eiiiiii", "======================================");
+//    }
+//
+//}
 
 
                     //未知3，同交易记录
@@ -185,12 +339,12 @@ public class MainActivity extends AppCompatActivity {
                             intValue = Integer.valueOf(g.a(transceive, transceive.length), 16).intValue();
                             action = (intValue / 100) + "." + (intValue % 100);
 //                                    bVar.f(action);
-                                Log.d("未知3***", action);
+                            Log.d("未知3***", action);
 
                         }
                         a(isoDep);
                     }
-                    Log.d("***", String.valueOf(Float.parseFloat(this.w) + Float.parseFloat(this.x)) + "元");
+//                    Log.d("***", String.valueOf(Float.parseFloat(this.w) + Float.parseFloat(this.x)) + "元");
 
 
                 }
@@ -199,20 +353,20 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     isoDep.close();
                 } catch (IOException e) {
-                    Log.d("ERR","close fail");
+                    Log.d("ERR", "close fail");
                     e.printStackTrace();
                 }
             }
         } catch (IOException e2) {
             String str = "****";
-            Log.d("ERR","ERROR");
+            Log.d("ERR", "ERROR");
             action = (e2 == null || e2.getLocalizedMessage() == null) ? "" : e2.getLocalizedMessage();
             Log.e(str, action);
             if (isoDep != null) {
                 try {
                     isoDep.close();
                 } catch (IOException e22) {
-                    Log.d("ERR","close fail");
+                    Log.d("ERR", "close fail");
                     e22.printStackTrace();
                 }
             }
@@ -241,8 +395,6 @@ public class MainActivity extends AppCompatActivity {
     protected String w = "0";
     protected String x = "0";
     protected String y;
-
-
 
 
     private String byteToHex(byte[] bArr) {
