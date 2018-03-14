@@ -27,7 +27,6 @@ public class Util {
         return str.toString();
     }
 
-
     //错误提示
     public static void ErrorToast(int i, Activity activity) {
         switch (i) {
@@ -58,7 +57,6 @@ public class Util {
         }
     }
 
-
     public static boolean a(String str) {
         char[] toCharArray = Pattern.compile("\\s*|\t*|\r*|\n*").matcher(str).replaceAll("").replaceAll("\\p{P}", "").trim().toCharArray();
         float length = (float) toCharArray.length;
@@ -71,7 +69,6 @@ public class Util {
         return ((double) (f / length)) > 0.4d;
     }
 
-
     public static boolean a(char c) {
         Character.UnicodeBlock of = Character.UnicodeBlock.of(c);
         return of == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS || of == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS || of == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A || of == Character.UnicodeBlock.GENERAL_PUNCTUATION || of == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION || of == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS;
@@ -82,7 +79,7 @@ public class Util {
     }
 
     public static boolean g(String str) {
-        return (str == null || str.trim().equals("") || str.equalsIgnoreCase("null")) ? false : true;
+        return !(str == null || str.trim().equals("") || str.equalsIgnoreCase("null"));
     }
 
 }

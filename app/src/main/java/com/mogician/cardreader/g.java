@@ -33,7 +33,7 @@ public class g {
 
     public static String a(byte[] bArr, int i, int i2, String str) {
         try {
-            String str2 = "";
+//            String str2 = "";
             byte[] bArr2 = new byte[i2];
             a(bArr, i, bArr2, 0, i2);
             return new String(bArr2, str);
@@ -49,9 +49,11 @@ public class g {
         } else if (i + i3 > bArr.length) {
             throw new RuntimeException("源字节数组的长度与要求复制的长度不符");
         } else {
-            for (int i4 = 0; i4 < i3; i4++) {
-                bArr2[i2 + i4] = bArr[i + i4];
-            }
+            System.arraycopy(bArr, i, bArr2, i2, i3);
+//            for (int i4 = 0; i4 < i3; i4++) {
+//                bArr2[i2 + i4] = bArr[i + i4];
+//            }
+            //AS自动优化
         }
     }
 

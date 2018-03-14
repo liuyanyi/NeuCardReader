@@ -1,16 +1,19 @@
 package com.mogician.cardreader;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
+import java.util.Locale;
 
 
-//TODO 用于交易记录，整理到其他类后删除
+//TODO 单个交易记录类
 public class TradingRecordInfo implements Serializable, Comparable<TradingRecordInfo> {
     private static final long serialVersionUID = -6533154177080647539L;
     private String tradingDateTime;
-    private long tradingMoney;
-    private int tradingType;
+    private String tradingMoney;
+    private String tradingType;
 
-    public int compareTo(TradingRecordInfo tradingRecordInfo) {
+    public int compareTo(@NonNull TradingRecordInfo tradingRecordInfo) {
         return tradingRecordInfo.getTradingDateTime().compareTo(this.tradingDateTime);
     }
 
@@ -18,23 +21,33 @@ public class TradingRecordInfo implements Serializable, Comparable<TradingRecord
         return this.tradingDateTime;
     }
 
-    public long getTradingMoney() {
+    public String getTradingMoney() {
         return this.tradingMoney;
     }
 
-    public int getTradingType() {
+    public String getTradingType() {
         return this.tradingType;
     }
 
     public void setTradingDateTime(String str) {
-        this.tradingDateTime = str;
+        this.tradingDateTime = str.substring(0, 4) + "." + str.substring(4, 6) + "." + str.substring(6, 8) + " " + str.substring(8, 10) + ":" + str.substring(10, 12);
     }
 
     public void setTradingMoney(long j) {
-        this.tradingMoney = j;
+        this.tradingMoney = String.format(Locale.getDefault(), "%.2f", j / 100.0);
     }
 
     public void setTradingType(int i) {
-        this.tradingType = i;
+        switch (i) {
+            case 6:
+                this.tradingType = "消费";
+                break;
+            case 2:
+                this.tradingType = "充值";
+                break;
+            default:
+                this.tradingType = String.valueOf(i);
+        }
+
     }
 }

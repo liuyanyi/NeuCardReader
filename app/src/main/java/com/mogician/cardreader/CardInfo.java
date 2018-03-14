@@ -2,31 +2,33 @@ package com.mogician.cardreader;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by Mogician on 2018/3/12.
  */
 
-public class cardInfo {
+public class CardInfo {
 
     private Activity mainActivity;
 
     private String hardwareId = "";
-
     private String studentId = "";
-
     private String studentName = "";
-
     private String cardBalance = "";
-
     private String studentDept = "";
-
     private String personId = "";
+
+    private ArrayList<TradingRecordInfo> tradeList = new ArrayList<>();
 
     private boolean isNewcapecCard = false;
 
@@ -40,19 +42,34 @@ public class cardInfo {
     private ImageView pgI;
     private TextView atten;
     private ProgressBar pgBar;
+    private CardView dealCard;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
-    cardInfo(Activity m) {
+    public ArrayList<TradingRecordInfo> getTradeList() {
+        return tradeList;
+    }
+
+    CardInfo(Activity m) {
         this.mainActivity = m;
-        this.isCard = (TextView) mainActivity.findViewById(R.id.isNewcapec);
-        this.name = (TextView) mainActivity.findViewById(R.id.Name);
-        this.id = (TextView) mainActivity.findViewById(R.id.Id);
-        this.balance = (TextView) mainActivity.findViewById(R.id.Balance);
-        this.hardware = (TextView) mainActivity.findViewById(R.id.Hardware);
-        this.dept = (TextView) mainActivity.findViewById(R.id.Dept);
-        this.pId = (TextView) mainActivity.findViewById(R.id.personId);
-        this.pgI = (ImageView) mainActivity.findViewById(R.id.pgImg);
-        this.pgBar = (ProgressBar) mainActivity.findViewById(R.id.pgBar);
-        this.atten = (TextView) mainActivity.findViewById(R.id.attention);
+        this.isCard = mainActivity.findViewById(R.id.isNewcapec);
+        this.name = mainActivity.findViewById(R.id.Name);
+        this.id = mainActivity.findViewById(R.id.Id);
+        this.balance = mainActivity.findViewById(R.id.Balance);
+        this.hardware = mainActivity.findViewById(R.id.Hardware);
+        this.dept = mainActivity.findViewById(R.id.Dept);
+        this.pId = mainActivity.findViewById(R.id.personId);
+        this.pgI = mainActivity.findViewById(R.id.pgImg);
+        this.pgBar = mainActivity.findViewById(R.id.pgBar);
+        this.atten = mainActivity.findViewById(R.id.attention);
+        this.dealCard = mainActivity.findViewById(R.id.dealCard);
+
+        this.mLayoutManager = new LinearLayoutManager(mainActivity, LinearLayoutManager.VERTICAL, false);
+        this.mRecyclerView = mainActivity.findViewById(R.id.dealList);
+        // 设置布局管理器
+        this.mRecyclerView.setLayoutManager(mLayoutManager);
+
     }
 
     public void setHardwareId(String hardwareId) {
@@ -92,16 +109,24 @@ public class cardInfo {
         atten.setText("读取中");
     }
 
-    public void onFinish() {
+    public void onFinish(boolean isFull) {
         pgI.setVisibility(View.VISIBLE);
         pgBar.setVisibility(View.GONE);
-        if (isNewcapecCard) {
+        if (!isFull) {
+            //未能复现……
+            atten.setText("警告,读取内容不全，请重新放置卡片");
+            pgI.setColorFilter(Color.parseColor("#259b24"));
+        } else if (isNewcapecCard) {
             atten.setText("成功");
-            pgI.setColorFilter(Color.parseColor("#66ccff"));
+            pgI.setColorFilter(Color.parseColor("#259b24"));
         } else {
             atten.setText("失败,非校园卡");
-            pgI.setColorFilter(Color.RED);
+            pgI.setColorFilter(Color.parseColor("#e51c23"));
         }
+    }
+
+    public void addDeal(TradingRecordInfo tradingRecordInfo) {
+        tradeList.add(tradingRecordInfo);
     }
 
     public void showInLog() {
@@ -119,7 +144,7 @@ public class cardInfo {
         }
     }
 
-    public void show() {
+    public boolean show() {
         if (isNewcapecCard) {
             isCard.setText("校园卡");
 
@@ -134,6 +159,19 @@ public class cardInfo {
             dept.setText(studentDept);
 
             pId.setText(personId);
+
+            if (!getTradeList().isEmpty()) {
+
+                dealCard.setVisibility(View.VISIBLE);
+                // 设置adapter
+                mAdapter = new DealAdapter(getTradeList());
+                mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView.addItemDecoration(new ItemDivider(mainActivity, LinearLayoutManager.VERTICAL));
+            }
+
+            if (studentName.isEmpty() || studentId.isEmpty() || cardBalance.isEmpty())
+                return false;
+
         } else {
             isCard.setText("非校园卡");
 
@@ -144,8 +182,10 @@ public class cardInfo {
             balance.setText("");
             dept.setText("");
             pId.setText("");
+            dealCard.setVisibility(View.GONE);
 
         }
+        return true;
 
     }
 }

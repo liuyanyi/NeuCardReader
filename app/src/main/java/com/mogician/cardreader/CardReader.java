@@ -16,9 +16,9 @@ import java.io.IOException;
 public class CardReader {
 
 
-    public static cardInfo readCard(Activity activity, Intent intent) {
-
-        cardInfo card = new cardInfo(activity);
+    public static CardInfo readCard(Activity activity, Intent intent) {
+        //TODO 拆分成多个方法
+        CardInfo card = new CardInfo(activity);
 
         Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         if (tagFromIntent == null)
@@ -121,8 +121,10 @@ public class CardReader {
 //                            Log.d("余额", action);
                             card.setCardBalance(action);
                         }
-                        a(isoDep);
                     }
+
+
+                    ReadTrade(isoDep, card);
 
 //测试部分，用于遍历卡内储存地址
 //
@@ -189,12 +191,12 @@ public class CardReader {
 //for(int j=0;j<fInts.tt.length;j++) {
 //    transceive = isoDep.transceive(g.a(fInts.tt[j]));
 //    if (transceive != null && g.c(transceive)) {
-//        a = g.a(transceive);
+//        a = g.ReadTrade(transceive);
 //        Log.d("测试0,"+j, String.valueOf(a));
 //        Log.d("测试0.5,"+j, g.a(transceive, transceive.length));
-//        g.a(a, 0, transceive, 0, transceive.length - 2);
+//        g.a(ReadTrade, 0, transceive, 0, transceive.length - 2);
 //        Log.d("测试1,"+j, String.valueOf(a));
-//        action = g.a(a, 0, a.length, "UTF-8").trim();
+//        action = g.a(ReadTrade, 0, ReadTrade.length, "UTF-8").trim();
 ////                        Log.d("***", action);
 //        Log.d("测试2,"+j, action);
 //        Log.d("eiiiiii", "======================================");
@@ -212,23 +214,23 @@ public class CardReader {
 //    }
 //
 //}
-
-
-                    //未知3，同交易记录
-                    transceive = isoDep.transceive(g.a(fInts.f));
-                    if (transceive != null && g.c(transceive)) {
-                        transceive = isoDep.transceive(g.a(fInts.n));
-                        if (transceive != null && g.c(transceive)) {
-                            transceive = g.a(transceive);
-                            intValue = Integer.valueOf(g.a(transceive, transceive.length), 16);
-                            action = (intValue / 100) + "." + (intValue % 100);
-//                                    bVar.f(action);
-                            Log.d("未知3***", action);
-
-                        }
-                        a(isoDep);
-                    }
-//                    Log.d("***", String.valueOf(Float.parseFloat(this.w) + Float.parseFloat(this.x)) + "元");
+//
+//
+//                    //未知3，同交易记录
+//                    transceive = isoDep.transceive(g.a(fInts.f));
+//                    if (transceive != null && g.c(transceive)) {
+//                        transceive = isoDep.transceive(g.a(fInts.n));
+//                        if (transceive != null && g.c(transceive)) {
+//                            transceive = g.a(transceive);
+//                            intValue = Integer.valueOf(g.a(transceive, transceive.length), 16);
+//                            action = (intValue / 100) + "." + (intValue % 100);
+////                                    bVar.f(action);
+//                            Log.d("未知3***", action);
+//
+//                        }
+//                        ReadTrade(isoDep);
+//                    }
+////                    Log.d("***", String.valueOf(Float.parseFloat(this.w) + Float.parseFloat(this.x)) + "元");
 
 
                 }
@@ -256,33 +258,36 @@ public class CardReader {
     }
 
 
-    public static void a(IsoDep isoDep) {
-        //TODO 修复这个类，以及更名
+    public static void ReadTrade(IsoDep isoDep, CardInfo card) {
         for (int i = 0; i < 10; i++) {
-            byte[] a = e.a(fInts.t);
+            byte[] a = g.a(fInts.t);
             a[2] = (byte) (i + 1);
             try {
                 a = isoDep.transceive(a);
 //                DebugUtil.a("读钱包交易记录：", e.b(readCard));
-                Log.d("读钱包交易记录：", e.b(a));
+//                Log.d("读钱包交易记录：", e.b(a));
                 if (a != null && g.c(a) && Util.g(e.b(g.a(a)).replaceAll("0", ""))) {
                     TradingRecordInfo tradingRecordInfo = new TradingRecordInfo();
                     byte[] bArr = new byte[6];
                     byte[] bArr2 = new byte[1];
                     byte[] bArr3 = new byte[4];
-                    e.a(a, 5, bArr3, 0, bArr3.length);
-                    e.a(a, 9, bArr2, 0, bArr2.length);
-                    e.a(a, 10, bArr, 0, bArr.length);
-                    tradingRecordInfo.setTradingDateTime(e.e(a, 16));
-                    tradingRecordInfo.setTradingType(Integer.valueOf(e.b(bArr2), 16).intValue());
-                    tradingRecordInfo.setTradingMoney(Long.valueOf(e.b(bArr3), 16).longValue());
+                    g.a(a, 5, bArr3, 0, bArr3.length);
+                    g.a(a, 9, bArr2, 0, bArr2.length);
+                    g.a(a, 10, bArr, 0, bArr.length);
+                    tradingRecordInfo.setTradingDateTime(e.e1(a, 16));
+                    tradingRecordInfo.setTradingType(Integer.valueOf(e.b(bArr2), 16));
+                    tradingRecordInfo.setTradingMoney(Long.valueOf(e.b(bArr3), 16));
 //                    if (this.CJ != null) {
-
+//                    Log.d("读钱包交易记录：", String.valueOf(Long.valueOf(e.b(bArr3), 16).longValue()));
+//                    Log.d("读钱包交易记录：", String.valueOf(Integer.valueOf(e.b(bArr2), 16).intValue()));
+//                    Log.d("读钱包交易记录：", e.e1(a, 16));
+                    card.addDeal(tradingRecordInfo);
                     //TODO 读取交易信息至ListView中
                     //this.CJ.NfcTradeInfo(tradingRecordInfo);
 //                    }
                 }
             } catch (IOException e) {
+//                                Log.d("读钱包交易记录：", "boom");
                 e.printStackTrace();
             }
         }

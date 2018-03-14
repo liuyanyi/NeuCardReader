@@ -10,10 +10,9 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 
 //TODO 代码优化，预计大部分都可以去掉
@@ -21,6 +20,9 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private NfcAdapter nfcAdapter;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
     private PendingIntent pi;
 
     @Override
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
 
@@ -113,30 +116,14 @@ public class MainActivity extends AppCompatActivity
      */
     private void processIntent(Intent intent) {
         //取出封装在intent中的TAG
-        cardInfo card = CardReader.readCard(this, intent);
+        CardInfo card = CardReader.readCard(this, intent);
         if (card != null) {
-            card.onFinish();
-            card.show();
+
+            boolean isFull = card.show();
+            card.onFinish(isFull);
             //card.showInLog();
         }
     }
-
-
-    //TODO 去掉这堆东西……
-
-    protected TextView m;
-    protected TextView n;
-    protected TextView o;
-    protected TextView q;
-    protected View r;
-    protected View s;
-    protected TextView t;
-
-    protected cr v;
-    protected String w = "0";
-    protected String x = "0";
-    protected String y;
-
 
     public void onPause() {
         super.onPause();
