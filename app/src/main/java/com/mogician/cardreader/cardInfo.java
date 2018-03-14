@@ -1,5 +1,6 @@
 package com.mogician.cardreader;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 
 public class cardInfo {
 
-    private MainActivity mainActivity;
+    private Activity mainActivity;
 
     private String hardwareId = "";
 
@@ -40,7 +41,7 @@ public class cardInfo {
     private TextView atten;
     private ProgressBar pgBar;
 
-    cardInfo(MainActivity m) {
+    cardInfo(Activity m) {
         this.mainActivity = m;
         this.isCard = (TextView) mainActivity.findViewById(R.id.isNewcapec);
         this.name = (TextView) mainActivity.findViewById(R.id.Name);
