@@ -1,4 +1,4 @@
-package com.mogician.cardreader;
+package com.wolfaonliu.cardreader;
 
 //TODO 工具类更名+整理
 public class e {

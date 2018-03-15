@@ -1,4 +1,4 @@
-package com.mogician.cardreader;
+package com.wolfaonliu.cardreader;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -95,7 +95,7 @@ public class CardInfo {
     public void setCardBalance(String cardBalance) {
         if (cardBalance != null)
             isNewcapecCard = true;
-        this.cardBalance = cardBalance + "元";
+        this.cardBalance = cardBalance + mainActivity.getString(R.string.yuan);
     }
 
     public void setStudentDept(String studentDept) {
@@ -114,13 +114,13 @@ public class CardInfo {
         pgBar.setVisibility(View.GONE);
         if (!isFull) {
             //未能复现……
-            atten.setText("警告,读取内容不全，请重新放置卡片");
+            atten.setText(mainActivity.getString(R.string.reading_alert));
             pgI.setColorFilter(Color.parseColor("#259b24"));
         } else if (isNewcapecCard) {
-            atten.setText("成功");
+            atten.setText(mainActivity.getString(R.string.success));
             pgI.setColorFilter(Color.parseColor("#259b24"));
         } else {
-            atten.setText("失败,非校园卡");
+            atten.setText(mainActivity.getString(R.string.failed));
             pgI.setColorFilter(Color.parseColor("#e51c23"));
         }
     }
@@ -146,7 +146,7 @@ public class CardInfo {
 
     public boolean show() {
         if (isNewcapecCard) {
-            isCard.setText("校园卡");
+            isCard.setText(mainActivity.getString(R.string.isStuCard));
 
             name.setText(studentName);
 
@@ -164,7 +164,7 @@ public class CardInfo {
 
                 dealCard.setVisibility(View.VISIBLE);
                 // 设置adapter
-                mAdapter = new DealAdapter(getTradeList());
+                mAdapter = new DealAdapter(getTradeList(), mainActivity);
                 mRecyclerView.setAdapter(mAdapter);
                 mRecyclerView.addItemDecoration(new ItemDivider(mainActivity, LinearLayoutManager.VERTICAL));
             }
@@ -173,7 +173,7 @@ public class CardInfo {
                 return false;
 
         } else {
-            isCard.setText("非校园卡");
+            isCard.setText(mainActivity.getString(R.string.unsupport));
 
             hardware.setText(hardwareId);
 

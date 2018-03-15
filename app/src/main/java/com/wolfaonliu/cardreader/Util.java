@@ -1,6 +1,9 @@
-package com.mogician.cardreader;
+package com.wolfaonliu.cardreader;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.widget.Toast;
 
 import java.util.regex.Pattern;
@@ -80,6 +83,21 @@ public class Util {
 
     public static boolean g(String str) {
         return !(str == null || str.trim().equals("") || str.equalsIgnoreCase("null"));
+    }
+
+    public static String getVersion(Context context) {
+        String ver = "";
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+            ver = packageInfo.versionName;
+            if (ver == "" || ver.length() <= 0) {
+                return "";
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return ver;
     }
 
 }

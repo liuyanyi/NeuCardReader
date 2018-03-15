@@ -1,4 +1,4 @@
-package com.mogician.cardreader;
+package com.wolfaonliu.cardreader;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -49,7 +49,7 @@ public class CardReader {
             if (transceive != null && g.c(transceive)) {
                 transceive = isoDep.transceive(g.a(fInts.d));
                 if (transceive == null || !g.c(transceive)) {
-                    Util.aToast("读卡失败！", activity);
+                    Util.aToast(activity.getString(R.string.read_failed), activity);
                 } else {
                     byte[] a;
 
@@ -96,7 +96,7 @@ public class CardReader {
                         a = g.a(transceive);
                         g.a(a, 0, transceive, 0, transceive.length - 2);
                         action = g.a(a, 0, a.length, "GB18030").trim();
-                        Log.d("***", action);
+//                        Log.d("***", action);
                         if (Util.d(action) || Util.a(action) || action.contains("000000")) {
 //                                    bVar.d(action);
 //                            Log.d("学院******", action);

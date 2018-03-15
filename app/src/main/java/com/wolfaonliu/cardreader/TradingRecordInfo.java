@@ -1,4 +1,4 @@
-package com.mogician.cardreader;
+package com.wolfaonliu.cardreader;
 
 import android.support.annotation.NonNull;
 
@@ -11,7 +11,7 @@ public class TradingRecordInfo implements Serializable, Comparable<TradingRecord
     private static final long serialVersionUID = -6533154177080647539L;
     private String tradingDateTime;
     private String tradingMoney;
-    private String tradingType;
+    private int tradingType;
 
     public int compareTo(@NonNull TradingRecordInfo tradingRecordInfo) {
         return tradingRecordInfo.getTradingDateTime().compareTo(this.tradingDateTime);
@@ -25,7 +25,7 @@ public class TradingRecordInfo implements Serializable, Comparable<TradingRecord
         return this.tradingMoney;
     }
 
-    public String getTradingType() {
+    public int getTradingType() {
         return this.tradingType;
     }
 
@@ -38,16 +38,8 @@ public class TradingRecordInfo implements Serializable, Comparable<TradingRecord
     }
 
     public void setTradingType(int i) {
-        switch (i) {
-            case 6:
-                this.tradingType = "消费";
-                break;
-            case 2:
-                this.tradingType = "充值";
-                break;
-            default:
-                this.tradingType = String.valueOf(i);
-        }
 
+        this.tradingType = i;
     }
+
 }

@@ -1,4 +1,4 @@
-package com.mogician.cardreader;
+package com.wolfaonliu.cardreader;
 
 import android.content.Context;
 import android.content.res.TypedArray;

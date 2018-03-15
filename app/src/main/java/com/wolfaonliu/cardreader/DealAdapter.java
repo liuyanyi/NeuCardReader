@@ -1,5 +1,6 @@
-package com.mogician.cardreader;
+package com.wolfaonliu.cardreader;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +16,11 @@ import java.util.ArrayList;
 public class DealAdapter extends RecyclerView.Adapter<DealAdapter.ViewHolder> {
 
     private ArrayList<TradingRecordInfo> mData;
+    private Activity activity;
 
-    public DealAdapter(ArrayList<TradingRecordInfo> data) {
+    public DealAdapter(ArrayList<TradingRecordInfo> data, Activity activity) {
         this.mData = data;
+        this.activity = activity;
     }
 
     public void updateData(ArrayList<TradingRecordInfo> data) {
@@ -37,10 +40,20 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         // 绑定数据
         String m = mData.get(position).getTradingMoney();
-        String t = mData.get(position).getTradingType();
+        int t = mData.get(position).getTradingType();
         holder.time.setText(mData.get(position).getTradingDateTime());
         holder.money.setText(m);
-        holder.type.setText(t);
+        switch (t) {
+            case 2:
+                holder.type.setText(activity.getString(R.string.recharge));
+                break;
+            case 6:
+                holder.type.setText(activity.getString(R.string.consumption));
+                break;
+            default:
+                holder.type.setText(t);
+                break;
+        }
     }
 
     @Override
@@ -56,9 +69,9 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.ViewHolder> {
 
         public ViewHolder(View itemView) {
             super(itemView);
-            type = (TextView) itemView.findViewById(R.id.type);
-            money = (TextView) itemView.findViewById(R.id.deal);
-            time = (TextView) itemView.findViewById(R.id.time);
+            type = itemView.findViewById(R.id.type);
+            money = itemView.findViewById(R.id.deal);
+            time = itemView.findViewById(R.id.time);
         }
     }
 }

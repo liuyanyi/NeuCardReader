@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.mogician.cardreader.MainActivity"
+    tools:context="com.wolfaonliu.cardreader.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
 
@@ -74,8 +74,8 @@
                 <View
                     android:id="@+id/view"
                     android:layout_width="match_parent"
-                    android:layout_height="1.5dp"
-                    android:background="@android:color/darker_gray" />
+                    android:layout_height="1.2dp"
+                    android:background="?attr/colorButtonNormal" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -313,8 +313,8 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1.5dp"
-                    android:background="@android:color/darker_gray" />
+                    android:layout_height="1.2dp"
+                    android:background="?attr/colorButtonNormal" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/dealList"

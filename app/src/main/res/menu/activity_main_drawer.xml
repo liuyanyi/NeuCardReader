@@ -9,19 +9,19 @@
             android:checkable="true"
             android:checked="true"
             android:icon="@drawable/ic_menu_nfc"
-            android:title="读卡" />
+            android:title="@string/readCard" />
     </group>
 
-    <item android:title="其他">
+    <item android:title="@string/other">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="分享" />
+                android:title="@string/share" />
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_menu_info"
-                android:title="关于" />
+                android:title="@string/about" />
         </menu>
     </item>
 

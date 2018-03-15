@@ -1,4 +1,4 @@
-package com.mogician.cardreader;
+package com.wolfaonliu.cardreader;
 
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -71,10 +71,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
             Intent textIntent = new Intent(Intent.ACTION_SEND);
             textIntent.setType("text/plain");
-            textIntent.putExtra(Intent.EXTRA_TEXT, "Newcapec Card Reader : https://github.com/liuyanyi/NewcapecCardReader");
-            startActivity(Intent.createChooser(textIntent, "分享Newcapec Card Reader"));
+            textIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.app_name) + " : https://www.coolapk.com/apk/com.wolfaonliu.cardreader");
+            startActivity(Intent.createChooser(textIntent, getString(R.string.share) + getString(R.string.app_name)));
         } else if (id == R.id.nav_about) {
-
+            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
