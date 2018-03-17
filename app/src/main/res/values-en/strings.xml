@@ -45,4 +45,5 @@
     <string name="intho">In theory, it applies to all campus cards provided by the Newcapec Company.</string>
     <string name="aftertest">Only tested on campus card of NEU.</string>
     <string name="donate">Donate</string>
+    <string name="title_activity_settings">Settings</string>
 </resources>

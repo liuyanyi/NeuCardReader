@@ -1,0 +1,29 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/other">
+
+        <Preference
+            android:key="ver"
+            android:title="@string/version"></Preference>
+
+        <Preference
+            android:title="@string/developer"
+            android:summary="wolfaonliu"></Preference>
+
+        <Preference
+            android:title="@string/contact"
+            android:summary="wolfaonliu@gmail.com"></Preference>
+
+        <Preference
+            android:title="@string/github"
+            android:summary="https://github.com/liuyanyi/NewcapecCardReader"></Preference>
+    </PreferenceCategory>
+
+    <!-- NOTE: EditTextPreference accepts EditText attributes. -->
+    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
+
+    <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
+         dismiss it. -->
+    <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
+
+</PreferenceScreen>

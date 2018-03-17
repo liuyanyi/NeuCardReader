@@ -48,4 +48,5 @@
     <string name="report">反馈</string>
     <string name="intho">理论上适用于所有新开普公司提供的校园卡</string>
     <string name="aftertest">目前仅在东北大学校园卡测试通过</string>
+    <string name="title_activity_settings">设置</string>
 </resources>

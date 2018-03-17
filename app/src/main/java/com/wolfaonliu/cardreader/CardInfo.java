@@ -1,7 +1,9 @@
 package com.wolfaonliu.cardreader;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -144,9 +146,15 @@ public class CardInfo {
         }
     }
 
+    public String readpref() {
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mainActivity);
+        return pref.getString("example_text", "budui");
+    }
     public boolean show() {
         if (isNewcapecCard) {
-            isCard.setText(mainActivity.getString(R.string.isStuCard));
+//            isCard.setText(mainActivity.getString(R.string.isStuCard));
+            isCard.setText(readpref());
 
             name.setText(studentName);
 
