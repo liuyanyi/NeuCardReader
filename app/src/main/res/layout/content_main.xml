@@ -35,7 +35,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingBottom="5sp"
+                    android:paddingBottom="10sp"
                     android:paddingLeft="20sp"
                     android:paddingRight="20sp"
                     android:paddingTop="10sp">
@@ -71,196 +71,21 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="match_parent"
-                    android:layout_height="1.2dp"
-                    android:background="?attr/colorButtonNormal" />
-
                 <LinearLayout
+                    android:id="@+id/info_container"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:baselineAligned="false"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:paddingBottom="10sp"
                     android:paddingEnd="20sp"
                     android:paddingStart="20sp"
-                    android:paddingTop="5sp">
+                    android:visibility="gone">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <TextView
-                            android:id="@+id/title"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5sp"
-                            android:text="@string/card_cate"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/hardwaretitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5sp"
-                            android:text="@string/hardware_Id"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/nametitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5sp"
-                            android:text="@string/name"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/pidtitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5sp"
-                            android:text="@string/pId"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/idtitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5sp"
-                            android:text="@string/student_Id"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/balancetitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5sp"
-                            android:text="@string/balance"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/depttitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5sp"
-                            android:text="@string/Dept"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="4"
-                        android:orientation="vertical"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <TextView
-                            android:id="@+id/isNewcapec"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5sp"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:id="@+id/Hardware"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5sp"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/Name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5sp"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:id="@+id/personId"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5sp"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/Id"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5sp"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:id="@+id/Balance"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5sp"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:id="@+id/Dept"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5sp"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
+
 
         </android.support.v7.widget.CardView>
 

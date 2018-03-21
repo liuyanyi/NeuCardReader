@@ -3,6 +3,7 @@ package com.wolfaonliu.cardreader;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -34,17 +35,10 @@ public class CardInfo {
 
     private boolean isNewcapecCard = false;
 
-    private TextView name;
-    private TextView id;
-    private TextView balance;
-    private TextView hardware;
-    private TextView dept;
-    private TextView isCard;
-    private TextView pId;
     private ImageView pgI;
     private TextView atten;
-    private ProgressBar pgBar;
     private CardView dealCard;
+    private LinearLayout container;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -55,15 +49,8 @@ public class CardInfo {
 
     CardInfo(Activity m) {
         this.mainActivity = m;
-        this.isCard = mainActivity.findViewById(R.id.isNewcapec);
-        this.name = mainActivity.findViewById(R.id.Name);
-        this.id = mainActivity.findViewById(R.id.Id);
-        this.balance = mainActivity.findViewById(R.id.Balance);
-        this.hardware = mainActivity.findViewById(R.id.Hardware);
-        this.dept = mainActivity.findViewById(R.id.Dept);
-        this.pId = mainActivity.findViewById(R.id.personId);
+        this.container = mainActivity.findViewById(R.id.info_container);
         this.pgI = mainActivity.findViewById(R.id.pgImg);
-        this.pgBar = mainActivity.findViewById(R.id.pgBar);
         this.atten = mainActivity.findViewById(R.id.attention);
         this.dealCard = mainActivity.findViewById(R.id.dealCard);
 
@@ -71,7 +58,6 @@ public class CardInfo {
         this.mRecyclerView = mainActivity.findViewById(R.id.dealList);
         // 设置布局管理器
         this.mRecyclerView.setLayoutManager(mLayoutManager);
-
     }
 
     public void setHardwareId(String hardwareId) {
@@ -104,16 +90,8 @@ public class CardInfo {
         this.studentDept = studentDept;
     }
 
-
-    public void onStart() {
-        pgI.setVisibility(View.GONE);
-        pgBar.setVisibility(View.VISIBLE);
-        atten.setText("读取中");
-    }
-
     public void onFinish(boolean isFull) {
         pgI.setVisibility(View.VISIBLE);
-        pgBar.setVisibility(View.GONE);
         if (!isFull) {
             //未能复现……
             atten.setText(mainActivity.getString(R.string.reading_alert));
@@ -147,51 +125,69 @@ public class CardInfo {
     }
 
     public String readpref() {
-
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mainActivity);
         return pref.getString("example_text", "budui");
     }
+
+    private String[] title_init() {
+        String[] title = new String[7];
+        title[0] = mainActivity.getString(R.string.card_cate);
+        title[1] = mainActivity.getString(R.string.name);
+        title[2] = mainActivity.getString(R.string.student_Id);
+        title[3] = mainActivity.getString(R.string.balance);
+        title[4] = mainActivity.getString(R.string.hardware_Id);
+        title[5] = mainActivity.getString(R.string.Dept);
+        title[6] = mainActivity.getString(R.string.pId);
+        return title;
+    }
+
+    private String[] body_init() {
+        String[] body = new String[7];
+        body[0] = mainActivity.getString(R.string.isStuCard);
+        body[1] = studentName;
+        body[2] = studentId;
+        body[3] = cardBalance;
+        body[4] = hardwareId;
+        body[5] = studentDept;
+        body[6] = personId;
+        return body;
+    }
+
+    private Bundle bundle_init(String title, String body) {
+        Bundle bundle = new Bundle();
+        bundle.putString("name", title);
+        bundle.putString("body", body);
+        return bundle;
+    }
+
     public boolean show() {
+        InfoFragment infoFragment;
         if (isNewcapecCard) {
-//            isCard.setText(mainActivity.getString(R.string.isStuCard));
-            isCard.setText(readpref());
-
-            name.setText(studentName);
-
-            id.setText(studentId);
-
-            balance.setText(cardBalance);
-
-            hardware.setText(hardwareId);
-
-            dept.setText(studentDept);
-
-            pId.setText(personId);
-
+            container.setVisibility(View.VISIBLE);
+            String[] title = title_init();
+            String[] body = body_init();
+            for (int i = 0; i < title.length; i++) {
+                infoFragment = new InfoFragment();
+                infoFragment.setArguments(bundle_init(title[i], body[i]));
+                if (i == 0)
+                    mainActivity.getFragmentManager().beginTransaction().
+                            replace(R.id.info_container, infoFragment).commit();
+                else
+                    mainActivity.getFragmentManager().beginTransaction().
+                            add(R.id.info_container, infoFragment).commit();
+            }
             if (!getTradeList().isEmpty()) {
-
                 dealCard.setVisibility(View.VISIBLE);
                 // 设置adapter
                 mAdapter = new DealAdapter(getTradeList(), mainActivity);
                 mRecyclerView.setAdapter(mAdapter);
                 mRecyclerView.addItemDecoration(new ItemDivider(mainActivity, LinearLayoutManager.VERTICAL));
             }
-
             if (studentName.isEmpty() || studentId.isEmpty() || cardBalance.isEmpty())
                 return false;
-
         } else {
-            isCard.setText(mainActivity.getString(R.string.unsupport));
-
-            hardware.setText(hardwareId);
-
-            name.setText("");
-            id.setText("");
-            balance.setText("");
-            dept.setText("");
-            pId.setText("");
+            container.setVisibility(View.GONE);
             dealCard.setVisibility(View.GONE);
-
         }
         return true;
 

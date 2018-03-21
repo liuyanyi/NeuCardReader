@@ -10,7 +10,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
@@ -20,9 +19,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private NfcAdapter nfcAdapter;
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     private PendingIntent pi;
 
     @Override
@@ -56,7 +52,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+//
+//        Bundle b= new Bundle();
+//        b.putString("name","ceshiname");
+//        b.putString("body","ceshibody");
+//        infoFragment.setArguments(b);
+//        getFragmentManager().beginTransaction().add(R.id.info_container, infoFragment).commit();
     }
 
 
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_nfc) {
 
         } else if (id == R.id.nav_share) {
+//            getFragmentManager().executePendingTransactions();
             Intent textIntent = new Intent(Intent.ACTION_SEND);
             textIntent.setType("text/plain");
             textIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.app_name) + " : https://www.coolapk.com/apk/com.wolfaonliu.cardreader");
@@ -85,7 +87,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
     @Override
     public void onBackPressed() {
@@ -122,7 +123,6 @@ public class MainActivity extends AppCompatActivity
         //取出封装在intent中的TAG
         CardInfo card = CardReader.readCard(this, intent);
         if (card != null) {
-
             boolean isFull = card.show();
             card.onFinish(isFull);
             //card.showInLog();
