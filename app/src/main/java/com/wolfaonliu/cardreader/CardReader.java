@@ -7,6 +7,11 @@ import android.nfc.Tag;
 import android.nfc.tech.IsoDep;
 import android.util.Log;
 
+import com.wolfaonliu.cardreader.Util.Util;
+import com.wolfaonliu.cardreader.Util.e;
+import com.wolfaonliu.cardreader.Util.fInts;
+import com.wolfaonliu.cardreader.Util.g;
+
 import java.io.IOException;
 
 /**

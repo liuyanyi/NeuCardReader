@@ -1,4 +1,4 @@
-package com.wolfaonliu.cardreader;
+package com.wolfaonliu.cardreader.Util;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,10 +14,12 @@ import java.util.regex.Pattern;
 
 public class Util {
 
+    //打Toast
     public static void aToast(String string, Activity activity) {
         Toast.makeText(activity, string, Toast.LENGTH_SHORT).show();
     }
 
+    //转16进制
     public static String byteToHex(byte[] bArr) {
         int i = 0;
         String[] strArr = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
@@ -60,6 +62,8 @@ public class Util {
         }
     }
 
+
+    //？？？？？？？？？？？？？？？？？？
     public static boolean a(String str) {
         char[] toCharArray = Pattern.compile("\\s*|\t*|\r*|\n*").matcher(str).replaceAll("").replaceAll("\\p{P}", "").trim().toCharArray();
         float length = (float) toCharArray.length;
@@ -72,19 +76,24 @@ public class Util {
         return ((double) (f / length)) > 0.4d;
     }
 
+    //？？？？？？？？？？？？？？？？？？？？？？？？？？
     public static boolean a(char c) {
         Character.UnicodeBlock of = Character.UnicodeBlock.of(c);
         return of == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS || of == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS || of == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A || of == Character.UnicodeBlock.GENERAL_PUNCTUATION || of == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION || of == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS;
     }
 
+    //看空不空？？？？？？？？？？？？
     public static boolean d(String str) {
         return str == null || str.trim().equals("");
     }
 
+    //看空不空？？？？？？？？？？？？
     public static boolean g(String str) {
         return !(str == null || str.trim().equals("") || str.equalsIgnoreCase("null"));
     }
 
+
+    //获取版本号
     public static String getVersion(Context context) {
         String ver = "";
         try {
