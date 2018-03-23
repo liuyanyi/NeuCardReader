@@ -165,14 +165,16 @@ public class CardInfo {
 
 
             if (!tradeList.isEmpty()) {
-                dealCard.setVisibility(View.VISIBLE);
 
                 DealFragment dealFragment = new DealFragment();
 
                 mainActivity.getFragmentManager().beginTransaction().replace(R.id.deal_container, dealFragment).commit();
 
-                for (int i = 0; i < tradeList.size(); i++)
+                for (int i = 0; i < tradeList.size(); i++) {
                     addDealPreference(dealFragment, tradeList.get(i));
+                }
+                dealCard.setVisibility(View.VISIBLE);
+
             }
 
             if (studentName.isEmpty() || studentId.isEmpty() || cardBalance.isEmpty())

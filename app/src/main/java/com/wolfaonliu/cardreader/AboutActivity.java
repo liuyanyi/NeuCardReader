@@ -15,10 +15,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.wolfaonliu.cardreader.Util.Util;
 
 public class AboutActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,6 @@ public class AboutActivity extends AppCompatActivity {
         } catch (NullPointerException e) {
 
         }
-
     }
 
     @Override
@@ -54,10 +55,13 @@ public class AboutActivity extends AppCompatActivity {
 
     public static class AboutFragment extends PreferenceFragment {
 
+        int egg = 0;
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.info_about);
+            egg = 0;
         }
 
         private void showEmailDialog() {
@@ -89,6 +93,11 @@ public class AboutActivity extends AppCompatActivity {
             Intent intent;
             switch (preference.getOrder()) {
                 case 0:
+                    egg++;
+                    if (egg == 5) {
+                        Toast.makeText(this.getActivity(), "hahaha", Toast.LENGTH_SHORT).show();
+                        egg = 0;
+                    }
                     break;
                 case 1:
                     break;
