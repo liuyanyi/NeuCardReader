@@ -2,7 +2,7 @@
 
     <!-- NOTE: EditTextPreference accepts EditText attributes. -->
     <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
-    <PreferenceCategory android:title="Preference category">
+    <PreferenceCategory android:title="@string/display_settings">
 
         <MultiSelectListPreference
             android:defaultValue="@array/pref_sync_frequency_values"
@@ -10,6 +10,14 @@
             android:entryValues="@array/pref_sync_frequency_values"
             android:key="multi_select_list_preference_1"
             android:title="要显示的数据" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/list_preference_entries"
+            android:entryValues="@array/list_preference_entries"
+            android:key="list_preference_1"
+            android:title="显示模式"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null" />
         <EditTextPreference
             android:capitalize="words"
             android:defaultValue="@string/pref_default_display_name"
@@ -27,6 +35,22 @@
             android:negativeButtonText="@null"
             android:positiveButtonText="@null"
             android:title="@string/pref_title_add_friends_to_messages" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="储存设置">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switch_preference_1"
+            android:title="是否开启储存功能" />
+        <MultiSelectListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="@array/pref_sync_frequency_values"
+            android:dependency="switch_preference_1"
+            android:entries="@array/pref_sync_frequency_titles"
+            android:entryValues="@array/pref_sync_frequency_values"
+            android:key="multi_select_list_preference_1"
+            android:title="要保存的数据" />
     </PreferenceCategory>
 
     <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to

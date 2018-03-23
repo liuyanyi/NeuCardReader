@@ -38,7 +38,6 @@ public class TradingRecordInfo implements Serializable, Comparable<TradingRecord
     }
 
     public void setTradingType(int i) {
-
         this.tradingType = i;
     }
 

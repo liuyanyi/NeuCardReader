@@ -104,9 +104,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
+                android:id="@+id/deal_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
 
                 <TextView
                     android:id="@+id/textView"
@@ -125,14 +127,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="1.2dp"
                     android:background="?attr/colorButtonNormal" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/dealList"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="10sp">
-
-                </android.support.v7.widget.RecyclerView>
 
             </LinearLayout>
 

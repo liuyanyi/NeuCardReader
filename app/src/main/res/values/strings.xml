@@ -120,5 +120,6 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_settings">设置</string>
+    <string name="display_settings">显示设置</string>
 
 </resources>

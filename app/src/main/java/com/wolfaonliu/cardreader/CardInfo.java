@@ -6,8 +6,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -39,13 +37,6 @@ public class CardInfo {
     private TextView atten;
     private CardView dealCard;
     private LinearLayout container;
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-
-    public ArrayList<TradingRecordInfo> getTradeList() {
-        return tradeList;
-    }
 
     CardInfo(Activity m) {
         this.mainActivity = m;
@@ -53,11 +44,6 @@ public class CardInfo {
         this.pgI = mainActivity.findViewById(R.id.pgImg);
         this.atten = mainActivity.findViewById(R.id.attention);
         this.dealCard = mainActivity.findViewById(R.id.dealCard);
-
-        this.mLayoutManager = new LinearLayoutManager(mainActivity, LinearLayoutManager.VERTICAL, false);
-        this.mRecyclerView = mainActivity.findViewById(R.id.dealList);
-        // 设置布局管理器
-        this.mRecyclerView.setLayoutManager(mLayoutManager);
     }
 
     public void setHardwareId(String hardwareId) {
@@ -126,7 +112,7 @@ public class CardInfo {
 
     public String readpref() {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mainActivity);
-        return pref.getString("example_text", "budui");
+        return pref.getString("example_text", "error");
     }
 
     private String[] title_init() {
@@ -176,13 +162,19 @@ public class CardInfo {
                     mainActivity.getFragmentManager().beginTransaction().
                             add(R.id.info_container, infoFragment).commit();
             }
-            if (!getTradeList().isEmpty()) {
+
+
+            if (!tradeList.isEmpty()) {
                 dealCard.setVisibility(View.VISIBLE);
-                // 设置adapter
-                mAdapter = new DealAdapter(getTradeList(), mainActivity);
-                mRecyclerView.setAdapter(mAdapter);
-                mRecyclerView.addItemDecoration(new ItemDivider(mainActivity, LinearLayoutManager.VERTICAL));
+
+                DealFragment dealFragment = new DealFragment();
+
+                mainActivity.getFragmentManager().beginTransaction().replace(R.id.deal_container, dealFragment).commit();
+
+                for (int i = 0; i < tradeList.size(); i++)
+                    addDealPreference(dealFragment, tradeList.get(i));
             }
+
             if (studentName.isEmpty() || studentId.isEmpty() || cardBalance.isEmpty())
                 return false;
         } else {
@@ -191,5 +183,13 @@ public class CardInfo {
         }
         return true;
 
+    }
+
+    private void addDealPreference(DealFragment dealFragment, TradingRecordInfo tradingRecordInfo) {
+
+        DealPreference dealPreference = new DealPreference(mainActivity, null);
+        mainActivity.getFragmentManager().executePendingTransactions();
+        dealPreference.setInfo(tradingRecordInfo);
+        dealFragment.getPreferenceScreen().addPreference(dealPreference);
     }
 }

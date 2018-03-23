@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * Created by Mogician on 2018/3/21.
@@ -16,17 +17,22 @@ import android.view.ViewGroup;
 
 public class DealPreference extends Preference {
 
-    private static final String TAG = "PreferenceWithTip";
-    String pTitle = null;
-    String tipstring = null;
+    private static final String TAG = "DealPreference";
+    private Context c;
+    private String date = null;
+    private String type = null;
+    private String money = null;
+
 
     @SuppressLint("Recycle")
     public DealPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        Log.i(TAG, "PreferenceWithTip invoked");
+        c = context;
+        Log.i(TAG, "DealPreference invoked");
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.DealPreference);
-//        tipstring = ta.getString(R.styleable.PreferenceWithTip_tipstring);
-//        pTitle = ta.getString(R.styleable.PreferenceWithTip_titlestring);
+        date = ta.getString(R.styleable.DealPreference_Date_string);
+        type = ta.getString(R.styleable.DealPreference_Type_string);
+        money = ta.getString(R.styleable.DealPreference_Money_String);
         ta.recycle();
     }
 
@@ -37,10 +43,12 @@ public class DealPreference extends Preference {
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
-//        TextView pTitleView = (TextView) view.findViewById(R.id.prefs_title);
-//        pTitleView.setText(pTitle);
-//        TextView pTipView = (TextView) view.findViewById(R.id.prefs_tip);
-//        pTipView.setText(tipstring);
+        TextView dateView = view.findViewById(R.id.time);
+        dateView.setText(date);
+        TextView typeView = view.findViewById(R.id.type);
+        typeView.setText(type);
+        TextView moneyView = view.findViewById(R.id.deal);
+        moneyView.setText(money);
     }
 
     @Override
@@ -48,5 +56,22 @@ public class DealPreference extends Preference {
         super.onCreateView(parent);
         return LayoutInflater.from(getContext()).inflate(R.layout.deal_item,
                 parent, false);
+    }
+
+    public void setInfo(TradingRecordInfo t) {
+        date = t.getTradingDateTime();
+        int temp = t.getTradingType();
+        switch (temp) {
+            case 2:
+                type = c.getString(R.string.recharge);
+                break;
+            case 6:
+                type = c.getString(R.string.consumption);
+                break;
+            default:
+                type = String.valueOf(temp);
+                break;
+        }
+        money = t.getTradingMoney();
     }
 }
