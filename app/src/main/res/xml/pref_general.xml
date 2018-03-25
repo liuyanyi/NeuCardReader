@@ -5,9 +5,9 @@
     <PreferenceCategory android:title="@string/display_settings">
 
         <MultiSelectListPreference
-            android:defaultValue="@array/pref_sync_frequency_values"
-            android:entries="@array/pref_sync_frequency_titles"
-            android:entryValues="@array/pref_sync_frequency_values"
+            android:defaultValue="@array/pref_item_show_values"
+            android:entries="@array/pref_item_show"
+            android:entryValues="@array/pref_item_show_default_values"
             android:key="multi_select_list_preference_1"
             android:title="要显示的数据" />
         <ListPreference
@@ -18,23 +18,6 @@
             android:title="显示模式"
             android:negativeButtonText="@null"
             android:positiveButtonText="@null" />
-        <EditTextPreference
-            android:capitalize="words"
-            android:defaultValue="@string/pref_default_display_name"
-            android:inputType="textCapWords"
-            android:key="example_text"
-            android:maxLines="1"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:title="@string/pref_title_display_name" />
-        <ListPreference
-            android:defaultValue="-1"
-            android:entries="@array/pref_example_list_titles"
-            android:entryValues="@array/pref_example_list_values"
-            android:key="example_list"
-            android:negativeButtonText="@null"
-            android:positiveButtonText="@null"
-            android:title="@string/pref_title_add_friends_to_messages" />
     </PreferenceCategory>
     <PreferenceCategory android:title="储存设置">
 
@@ -45,10 +28,10 @@
         <MultiSelectListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:defaultValue="@array/pref_sync_frequency_values"
+            android:defaultValue="@array/pref_item_show_values"
             android:dependency="switch_preference_1"
-            android:entries="@array/pref_sync_frequency_titles"
-            android:entryValues="@array/pref_sync_frequency_values"
+            android:entries="@array/pref_item_show"
+            android:entryValues="@array/pref_item_show_values"
             android:key="multi_select_list_preference_1"
             android:title="要保存的数据" />
     </PreferenceCategory>

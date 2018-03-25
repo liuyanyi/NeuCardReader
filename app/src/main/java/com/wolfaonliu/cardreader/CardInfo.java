@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Mogician on 2018/3/12.
@@ -30,6 +32,7 @@ public class CardInfo {
     private String personId = "";
 
     private ArrayList<TradingRecordInfo> tradeList = new ArrayList<>();
+    private String[] showPart;
 
     private boolean isNewcapecCard = false;
 
@@ -44,6 +47,7 @@ public class CardInfo {
         this.pgI = mainActivity.findViewById(R.id.pgImg);
         this.atten = mainActivity.findViewById(R.id.attention);
         this.dealCard = mainActivity.findViewById(R.id.dealCard);
+        readpref();
     }
 
     public void setHardwareId(String hardwareId) {
@@ -84,6 +88,11 @@ public class CardInfo {
             pgI.setColorFilter(Color.parseColor("#259b24"));
         } else if (isNewcapecCard) {
             atten.setText(mainActivity.getString(R.string.success));
+//            String[] strings;
+//            strings = readpref().toArray(new String[] {});
+//            StringBuilder test= new StringBuilder();
+//            for (String string : strings) test.append(string).append(" ");
+//            atten.setText(test);
             pgI.setColorFilter(Color.parseColor("#259b24"));
         } else {
             atten.setText(mainActivity.getString(R.string.failed));
@@ -110,9 +119,14 @@ public class CardInfo {
         }
     }
 
-    public String readpref() {
+    public void readpref() {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mainActivity);
-        return pref.getString("example_text", "error");
+        Set<String> s = new HashSet<>();
+        for (int i = 0; i < 8; i++)
+            s.add(String.valueOf(i + 1));
+        Set<String> p = pref.getStringSet("multi_select_list_preference_1", s);
+
+        this.showPart = p.toArray(new String[]{});
     }
 
     private String[] title_init() {
@@ -146,16 +160,27 @@ public class CardInfo {
         return bundle;
     }
 
+    public boolean showJudge(int i) {
+        for (int m = 0; m < showPart.length; m++) {
+            if (Integer.parseInt(showPart[m]) == (i + 1))
+                return true;
+        }
+        return false;
+    }
+
     public boolean show() {
         InfoFragment infoFragment;
         if (isNewcapecCard) {
             container.setVisibility(View.VISIBLE);
             String[] title = title_init();
             String[] body = body_init();
-            for (int i = 0; i < title.length; i++) {
+            for (int i = 0, runtime = 0; i < title.length; i++) {
+                if (!showJudge(i))
+                    continue;
+                runtime++;
                 infoFragment = new InfoFragment();
                 infoFragment.setArguments(bundle_init(title[i], body[i]));
-                if (i == 0)
+                if (runtime == 1)
                     mainActivity.getFragmentManager().beginTransaction().
                             replace(R.id.info_container, infoFragment).commit();
                 else
@@ -166,29 +191,33 @@ public class CardInfo {
 
             if (!tradeList.isEmpty()) {
 
-                DealFragment dealFragment = new DealFragment();
+                if (!showJudge(7)) {
+                    dealCard.setVisibility(View.INVISIBLE);
+                } else {
+                    DealFragment dealFragment = new DealFragment();
 
-                mainActivity.getFragmentManager().beginTransaction().replace(R.id.deal_container, dealFragment).commit();
+                    mainActivity.getFragmentManager().beginTransaction().replace(R.id.deal_container, dealFragment).commit();
 
-                for (int i = 0; i < tradeList.size(); i++) {
-                    addDealPreference(dealFragment, tradeList.get(i));
+                    for (int i = 0; i < tradeList.size(); i++) {
+                        addDealPreference(dealFragment, tradeList.get(i));
+                    }
+                    dealCard.setVisibility(View.VISIBLE);
                 }
-                dealCard.setVisibility(View.VISIBLE);
-
             }
 
             if (studentName.isEmpty() || studentId.isEmpty() || cardBalance.isEmpty())
                 return false;
         } else {
+            DealFragment d = new DealFragment();
+            mainActivity.getFragmentManager().beginTransaction().replace(R.id.deal_container, d).commit();
             container.setVisibility(View.GONE);
-            dealCard.setVisibility(View.GONE);
+            dealCard.setVisibility(View.INVISIBLE);
         }
         return true;
 
     }
 
     private void addDealPreference(DealFragment dealFragment, TradingRecordInfo tradingRecordInfo) {
-
         DealPreference dealPreference = new DealPreference(mainActivity, null);
         mainActivity.getFragmentManager().executePendingTransactions();
         dealPreference.setInfo(tradingRecordInfo);

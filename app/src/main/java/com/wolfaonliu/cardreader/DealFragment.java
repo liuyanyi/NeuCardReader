@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 
 public class DealFragment extends PreferenceFragment {
 
+
+    private static final String TAG = "DealFragment";
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
