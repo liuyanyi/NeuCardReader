@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_vertical|center"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.wolfaonliu.cardreader.MainActivity"
     tools:showIn="@layout/app_bar_main">
@@ -12,9 +13,39 @@
     <!--TODO UI需要大幅重做-->
 
     <LinearLayout
+        android:id="@+id/attentionBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:alpha="0.5"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/pgImg"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:contentDescription="@string/nfc_icon_descript"
+            app:srcCompat="@drawable/ic_menu_nfc" />
+
+        <TextView
+            android:id="@+id/attention"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/attention"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -28,61 +59,16 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
+                android:id="@+id/info_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingBottom="10sp"
-                    android:paddingLeft="20sp"
-                    android:paddingRight="20sp"
-                    android:paddingTop="10sp">
-
-                    <ImageView
-                        android:id="@+id/pgImg"
-                        android:layout_width="40dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:baselineAligned="false"
-                        android:contentDescription="@string/nfc_icon_descript"
-                        android:visibility="visible"
-                        app:srcCompat="@drawable/ic_menu_nfc" />
-
-                    <ProgressBar
-                        android:id="@+id/pgBar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:indeterminate="false"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/attention"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="5"
-                        android:gravity="center_vertical"
-                        android:text="@string/attention"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/info_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:baselineAligned="false"
-                    android:orientation="vertical"
-                    android:paddingBottom="10sp"
-                    android:paddingEnd="20sp"
-                    android:paddingStart="20sp"
-                    android:visibility="gone">
-
-                </LinearLayout>
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="vertical"
+                android:paddingBottom="10sp"
+                android:paddingEnd="20sp"
+                android:paddingStart="20sp"
+                android:paddingTop="10sp"
+                android:visibility="gone">
 
             </LinearLayout>
 
@@ -133,4 +119,5 @@
         </android.support.v7.widget.CardView>
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>

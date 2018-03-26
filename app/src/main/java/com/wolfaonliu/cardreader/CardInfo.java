@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.wolfaonliu.cardreader.Util.Util;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -40,6 +42,7 @@ public class CardInfo {
     private TextView atten;
     private CardView dealCard;
     private LinearLayout container;
+    private LinearLayout attentionBox;
 
     CardInfo(Activity m) {
         this.mainActivity = m;
@@ -47,6 +50,7 @@ public class CardInfo {
         this.pgI = mainActivity.findViewById(R.id.pgImg);
         this.atten = mainActivity.findViewById(R.id.attention);
         this.dealCard = mainActivity.findViewById(R.id.dealCard);
+        this.attentionBox = mainActivity.findViewById(R.id.attentionBox);
         readpref();
     }
 
@@ -172,9 +176,12 @@ public class CardInfo {
         InfoFragment infoFragment;
         if (isNewcapecCard) {
             container.setVisibility(View.VISIBLE);
+            attentionBox.setVisibility(View.INVISIBLE);
+            Util.aToast(mainActivity.getString(R.string.success), mainActivity);
             String[] title = title_init();
             String[] body = body_init();
-            for (int i = 0, runtime = 0; i < title.length; i++) {
+            int runtime = 0;
+            for (int i = 0; i < title.length; i++) {
                 if (!showJudge(i))
                     continue;
                 runtime++;
@@ -188,6 +195,10 @@ public class CardInfo {
                             add(R.id.info_container, infoFragment).commit();
             }
 
+            if (runtime == 0) {
+                attentionBox.setVisibility(View.VISIBLE);
+                container.setVisibility(View.GONE);
+            }
 
             if (!tradeList.isEmpty()) {
 
@@ -212,6 +223,7 @@ public class CardInfo {
             mainActivity.getFragmentManager().beginTransaction().replace(R.id.deal_container, d).commit();
             container.setVisibility(View.GONE);
             dealCard.setVisibility(View.INVISIBLE);
+            attentionBox.setVisibility(View.VISIBLE);
         }
         return true;
 
