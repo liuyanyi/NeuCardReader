@@ -46,4 +46,38 @@
     <string name="aftertest">Only tested on campus card of NEU.</string>
     <string name="donate">Donate</string>
     <string name="title_activity_settings">Settings</string>
+
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_item_show">
+        <item>Category</item>
+        <item>Name</item>
+        <item>Stu ID</item>
+        <item>Balance</item>
+        <item>Department</item>
+        <item>Hardware ID</item>
+        <item>Preson ID</item>
+        <item>Deal list</item>
+    </string-array>
+    <string-array name="pref_item_show_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+    <string-array name="pref_item_show_default_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
 </resources>

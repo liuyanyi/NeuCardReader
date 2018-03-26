@@ -58,6 +58,7 @@
 
         <activity
             android:name=".AboutActivity"
+            android:label="@string/about"
             android:theme="@style/AppTheme" />
 
         <activity

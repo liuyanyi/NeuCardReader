@@ -41,12 +41,12 @@ public class CardInfo {
     private ImageView pgI;
     private TextView atten;
     private CardView dealCard;
-    private LinearLayout container;
+    private CardView container;
     private LinearLayout attentionBox;
 
     CardInfo(Activity m) {
         this.mainActivity = m;
-        this.container = mainActivity.findViewById(R.id.info_container);
+        this.container = mainActivity.findViewById(R.id.card_container);
         this.pgI = mainActivity.findViewById(R.id.pgImg);
         this.atten = mainActivity.findViewById(R.id.attention);
         this.dealCard = mainActivity.findViewById(R.id.dealCard);

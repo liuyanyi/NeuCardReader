@@ -9,9 +9,7 @@
     tools:context="com.wolfaonliu.cardreader.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-
-    <!--TODO UI需要大幅重做-->
-
+    
     <LinearLayout
         android:id="@+id/attentionBox"
         android:layout_width="match_parent"
@@ -41,19 +39,20 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
         <android.support.v7.widget.CardView
             android:id="@+id/card_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_weight="1"
             android:visibility="gone"
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,13 +77,14 @@
 
         <android.support.v7.widget.CardView
             android:id="@+id/dealCard"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:visibility="invisible"
+            android:layout_weight="1"
+            android:visibility="gone"
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +92,7 @@
 
             <LinearLayout
                 android:id="@+id/deal_container"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:paddingBottom="10dp">
