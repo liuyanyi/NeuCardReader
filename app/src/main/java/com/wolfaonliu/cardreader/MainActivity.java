@@ -52,14 +52,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-//
-//        Bundle b= new Bundle();
-//        b.putString("name","ceshiname");
-//        b.putString("body","ceshibody");
-//        infoFragment.setArguments(b);
-//        getFragmentManager().beginTransaction().add(R.id.info_container, infoFragment).commit();
-    }
 
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
