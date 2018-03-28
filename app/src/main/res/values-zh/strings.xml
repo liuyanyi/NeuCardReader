@@ -7,8 +7,7 @@
     <string name="background_descript">background</string>
     <string name="nfc_icon_descript">NFC_Icon</string>
 
-    <string name="app_name">新开普读卡器</string>
-    <string name="full_name">新开普读卡器</string>
+    <string name="app_name">NEU读卡器</string>
     <string name="attention">将卡片放置到读卡区</string>
     <string name="card_cate">卡类型</string>
     <string name="name">姓名</string>
@@ -46,8 +45,8 @@
     <string name="no">否</string>
     <string name="email_clint">选择邮件客户端</string>
     <string name="report">反馈</string>
-    <string name="intho">理论上适用于所有新开普公司提供的校园卡</string>
-    <string name="aftertest">目前仅在东北大学校园卡测试通过</string>
+    <string name="intho">适用于东北大学校园卡。</string>
+    <string name="aftertest">东北大学校园卡由新开普提供。</string>
     <string name="title_activity_settings">设置</string>
 
 

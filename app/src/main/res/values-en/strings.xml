@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Newcapec Card Reader</string>
-    <string name="full_name">Newcapec Card Reader</string>
+    <string name="app_name">NEU Card Reader</string>
     <string name="attention">Place the card in the reader area</string>
     <string name="card_cate">Category</string>
     <string name="name">Name</string>
@@ -42,8 +41,8 @@
     <string name="no">No</string>
     <string name="email_clint">Choose an Email Client</string>
     <string name="report">" Report"</string>
-    <string name="intho">In theory, it applies to all campus cards provided by the Newcapec Company.</string>
-    <string name="aftertest">Only tested on campus card of NEU.</string>
+    <string name="intho">The application applies to campus cards of NEU(China).</string>
+    <string name="aftertest">Campus card of NEU is provided by NewCapec Inc.</string>
     <string name="donate">Donate</string>
     <string name="title_activity_settings">Settings</string>
 
