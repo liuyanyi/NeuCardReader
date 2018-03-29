@@ -123,12 +123,12 @@ public class CardInfo {
         }
     }
 
-    public void readpref() {
+    private void readpref() {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mainActivity);
         Set<String> s = new HashSet<>();
         for (int i = 0; i < 8; i++)
             s.add(String.valueOf(i + 1));
-        Set<String> p = pref.getStringSet("multi_select_list_preference_1", s);
+        Set<String> p = pref.getStringSet("data_to_show", s);
 
         this.showPart = p.toArray(new String[]{});
     }
@@ -164,12 +164,12 @@ public class CardInfo {
         return bundle;
     }
 
-    public boolean showJudge(int i) {
-        for (int m = 0; m < showPart.length; m++) {
-            if (Integer.parseInt(showPart[m]) == (i + 1))
-                return true;
+    private boolean showJudge(int i) {
+        for (String aShowPart : showPart) {
+            if (Integer.parseInt(aShowPart) == (i + 1))
+                return false;
         }
-        return false;
+        return true;
     }
 
     public boolean show() {
@@ -182,7 +182,7 @@ public class CardInfo {
             String[] body = body_init();
             int runtime = 0;
             for (int i = 0; i < title.length; i++) {
-                if (!showJudge(i))
+                if (showJudge(i))
                     continue;
                 runtime++;
                 infoFragment = new InfoFragment();
@@ -202,7 +202,7 @@ public class CardInfo {
 
             if (!tradeList.isEmpty()) {
 
-                if (!showJudge(7)) {
+                if (showJudge(7)) {
                     dealCard.setVisibility(View.INVISIBLE);
                 } else {
                     DealFragment dealFragment = new DealFragment();
@@ -216,8 +216,7 @@ public class CardInfo {
                 }
             }
 
-            if (studentName.isEmpty() || studentId.isEmpty() || cardBalance.isEmpty())
-                return false;
+            return !studentName.isEmpty() && !studentId.isEmpty() && !cardBalance.isEmpty();
         } else {
             DealFragment d = new DealFragment();
             mainActivity.getFragmentManager().beginTransaction().replace(R.id.deal_container, d).commit();

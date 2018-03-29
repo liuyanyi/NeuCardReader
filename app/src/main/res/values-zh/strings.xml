@@ -50,7 +50,12 @@
     <string name="title_activity_settings">设置</string>
 
 
-    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string name="storage_settings">储存设置</string>
+    <string name="data_display">要显示的数据</string>
+    <string name="display_mode">显示模式</string>
+    <string name="unavailable">功能未完成</string>
+    <string name="storage">储存功能</string>
+    <string name="data_save">要保存的数据</string>
     <string-array name="pref_item_show">
         <item>卡类型</item>
         <item>姓名</item>
@@ -81,5 +86,6 @@
         <item>7</item>
         <item>8</item>
     </string-array>
+    <string name="display_settings">显示设置</string>
 
 </resources>

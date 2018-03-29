@@ -8,32 +8,37 @@
             android:defaultValue="@array/pref_item_show_values"
             android:entries="@array/pref_item_show"
             android:entryValues="@array/pref_item_show_default_values"
-            android:key="multi_select_list_preference_1"
-            android:title="要显示的数据" />
+            android:key="data_to_show"
+            android:title="@string/data_display" />
         <ListPreference
             android:defaultValue="1"
-            android:entries="@array/list_preference_entries"
-            android:entryValues="@array/list_preference_entries"
-            android:key="list_preference_1"
-            android:title="显示模式"
+            android:enabled="false"
+            android:entries="@array/display_mode"
+            android:entryValues="@array/display_mode_values"
+            android:key="show_mode"
             android:negativeButtonText="@null"
-            android:positiveButtonText="@null" />
+            android:positiveButtonText="@null"
+            android:summary="@string/unavailable"
+            android:title="@string/display_mode" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="储存设置">
+    <PreferenceCategory android:title="@string/storage_settings">
 
         <SwitchPreference
             android:defaultValue="false"
-            android:key="switch_preference_1"
-            android:title="是否开启储存功能" />
+            android:enabled="false"
+            android:key="data_save"
+            android:summary="@string/unavailable"
+            android:title="@string/storage" />
         <MultiSelectListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@array/pref_item_show_values"
-            android:dependency="switch_preference_1"
+            android:dependency="data_save"
             android:entries="@array/pref_item_show"
             android:entryValues="@array/pref_item_show_values"
-            android:key="multi_select_list_preference_1"
-            android:title="要保存的数据" />
+            android:key="data_to_save"
+            android:summary="@string/unavailable"
+            android:title="@string/data_save" />
     </PreferenceCategory>
 
     <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to

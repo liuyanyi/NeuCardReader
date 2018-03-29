@@ -47,7 +47,6 @@
     <string name="title_activity_settings">Settings</string>
 
 
-    <string name="pref_title_sync_frequency">Sync frequency</string>
     <string-array name="pref_item_show">
         <item>Category</item>
         <item>Name</item>
@@ -78,5 +77,12 @@
         <item>7</item>
         <item>8</item>
     </string-array>
+    <string name="display_settings">Display Settings</string>
+    <string name="storage_settings">Storage Settings</string>
+    <string name="data_display">Data Display</string>
+    <string name="display_mode">Display Mode</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="storage">Storage Feature</string>
+    <string name="data_save">Data Saved</string>
 
 </resources>

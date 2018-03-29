@@ -45,7 +45,6 @@
                     android:id="@+id/textView4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-condensed"
                     android:gravity="bottom|center_vertical|center"
                     android:text="@string/app_name"
                     android:textSize="18sp"
@@ -69,11 +68,5 @@
         </android.support.v7.widget.CardView>
 
     </LinearLayout>
-
-    <!--<include-->
-    <!--layout="@layout/app_bar_about"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent" />-->
-
 
 </android.support.v4.widget.DrawerLayout>
