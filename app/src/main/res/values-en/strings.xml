@@ -84,5 +84,6 @@
     <string name="unavailable">Unavailable</string>
     <string name="storage">Storage Feature</string>
     <string name="data_save">Data Saved</string>
+    <string name="refresh">Refresh</string>
 
 </resources>

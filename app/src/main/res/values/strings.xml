@@ -98,5 +98,6 @@
     <string name="unavailable">功能未完成</string>
     <string name="storage">储存功能</string>
     <string name="data_save">要保存的数据</string>
+    <string name="refresh">刷新</string>
 
 </resources>

@@ -14,6 +14,8 @@ import com.wolfaonliu.cardreader.Util.g;
 
 import java.io.IOException;
 
+import static com.wolfaonliu.cardreader.Util.fInts.j;
+
 /**
  * Created by Mogician on 2018/3/14.
  */
@@ -23,7 +25,7 @@ public class CardReader {
 
     public static CardInfo readCard(Activity activity, Intent intent) {
         //TODO 拆分成多个方法
-        CardInfo card = new CardInfo(activity);
+        CardInfo card = new CardInfo();
 
         Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         if (tagFromIntent == null)
@@ -59,7 +61,7 @@ public class CardReader {
                     byte[] a;
 
 
-                    transceive = isoDep.transceive(g.a(fInts.j));
+                    transceive = isoDep.transceive(g.a(j));
                     //名字
                     if (transceive != null && g.c(transceive)) {
                         a = g.a(transceive);
@@ -124,7 +126,7 @@ public class CardReader {
 
 //                                    bVar.e(action);
 //                            Log.d("余额", action);
-                            card.setCardBalance(action);
+                            card.setCardBalance(action, activity);
                         }
                     }
 
@@ -135,27 +137,28 @@ public class CardReader {
 //
 //                    for(int j=0;j<fInts.tt.length;j++)
 ////                        transceive = isoDep.transceive(g.a(fInts.tt[j]));
-//                        for(int ii=0x961600;ii<0x961700;ii=ii+0x1){
+//                        for(int ii=0x000000;ii<0x001000;ii=ii+0x10){
 //                            String sss;
-//                        if(ii<=0xF)
-//                            sss="00B0"+"00000"+Integer.toHexString(ii).toUpperCase();
+//                            String head = "805C";
+//                            if(ii<=0xF)
+//                            sss=head+"00000"+Integer.toHexString(ii).toUpperCase();
 //                        else if(ii<0xFF)
-//                            sss="00B0"+"0000"+Integer.toHexString(ii).toUpperCase();
+//                            sss=head+"0000"+Integer.toHexString(ii).toUpperCase();
 //                        else if(ii<0xFFF)
-//                            sss="00B0"+"000"+Integer.toHexString(ii).toUpperCase();
+//                            sss=head+"000"+Integer.toHexString(ii).toUpperCase();
 //                        else if(ii<0xFFFF)
-//                            sss="00B0"+"00"+Integer.toHexString(ii).toUpperCase();
+//                            sss=head+"00"+Integer.toHexString(ii).toUpperCase();
 //                        else if(ii<0xFFFFF)
-//                            sss="00B0"+"0"+Integer.toHexString(ii).toUpperCase();
+//                            sss=head+"0"+Integer.toHexString(ii).toUpperCase();
 //                        else
-//                            sss="00B0"+""+Integer.toHexString(ii).toUpperCase();
+//                            sss=head+""+Integer.toHexString(ii).toUpperCase();
 //
 //
 //                            Log.d("===", "============="+j+","+sss+"=================");
 //
 //                            transceive = isoDep.transceive(g.a(fInts.tt[j]));
 //                    //测试
-//                    if (transceive != null && g.c(transceive)) {
+//                    if (/*transceive != null && */g.c(transceive)) {
 //                        transceive = isoDep.transceive(g.a(sss));
 //                        if (transceive != null && g.c(transceive)) {
 ////                            Log.d("测试", byteToHex(transceive));
@@ -168,14 +171,17 @@ public class CardReader {
 ////                            System.out.println("\n打印2："+str2);
 ////                            Log.d("测试", byteToHex(transceive));
 ////                            Log.d("测试", transceive.toString().trim());
+//                            Log.d("===", "============="+j+","+sss+"=================");
+//
 //                            Log.d("测试", new String(transceive,"GB18030").trim());
 ////                            Log.d("测试", new String(transceive,"UTF-8").trim());
 ////                            Log.d("测试", new String(transceive,"ISO-8859-1").trim());
 //
 //                            try {
-//                                intValue = Integer.valueOf(g.a(transceive, transceive.length), 16).intValue();
+//                                intValue = Integer.valueOf(g.a(transceive, transceive.length), 16);
 //                                action = (intValue / 100) + "." + (intValue % 100);
 ////                                    bVar.e(action);
+//                                Log.d("===", "============="+j+","+sss+"=================");
 //                                Log.d("测试", action);
 //                            }catch (NumberFormatException e){
 //                                Log.d("测试", "boom");
@@ -261,7 +267,6 @@ public class CardReader {
         }
         return card;
     }
-
 
     public static void ReadTrade(IsoDep isoDep, CardInfo card) {
         for (int i = 0; i < 10; i++) {

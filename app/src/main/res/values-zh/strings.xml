@@ -87,5 +87,6 @@
         <item>8</item>
     </string-array>
     <string name="display_settings">显示设置</string>
+    <string name="refresh">刷新</string>
 
 </resources>
