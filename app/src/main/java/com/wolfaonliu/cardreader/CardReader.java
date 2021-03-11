@@ -288,7 +288,7 @@ public class CardReader {
                 }
             } catch (IOException e) {
 //                                Log.d("读钱包交易记录：", "boom");
-                e.printStackTrace();
+                LOG.error(e);
             }
         }
     }
