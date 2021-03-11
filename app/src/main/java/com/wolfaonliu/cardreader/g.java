@@ -28,7 +28,7 @@ public class g {
             bArr2[i6] = a[i5 & 15];
             i2++;
         }
-        return new String(bArr2);
+        return String.valueOf(bArr2);
     }
 
     public static String a(byte[] bArr, int i, int i2, String str) {
