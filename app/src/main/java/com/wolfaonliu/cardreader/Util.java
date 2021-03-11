@@ -91,7 +91,7 @@ public class Util {
             PackageManager packageManager = context.getPackageManager();
             PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
             ver = packageInfo.versionName;
-            if (ver == "" || ver.length() <= 0) {
+            if (ver.equals("") || ver.length() <= 0) {
                 return "";
             }
         } catch (PackageManager.NameNotFoundException e) {
