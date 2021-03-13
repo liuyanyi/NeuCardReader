@@ -239,7 +239,7 @@ public class CardReader {
                 isoDep.close();
             } catch (IOException e) {
                 Log.d("ERR", "close fail");
-                log.error(e);
+                
             }
         } catch (IOException e2) {
             String str = "****";
@@ -250,7 +250,7 @@ public class CardReader {
                 isoDep.close();
             } catch (IOException e22) {
                 Log.d("ERR", "close fail");
-                log.error(e22);
+                
             }
 
         }
@@ -288,7 +288,7 @@ public class CardReader {
                 }
             } catch (IOException e) {
 //                                Log.d("读钱包交易记录：", "boom");
-                LOG.error(e);
+                
             }
         }
     }
